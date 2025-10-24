@@ -1,5 +1,9 @@
 <?php
-require_once __DIR__ . '/Database.php';
+namespace App;
+
+use PDO;
+
+// require_once __DIR__ . '/Database.php';
 class UserRepository
 {
 private PDO $pdo;

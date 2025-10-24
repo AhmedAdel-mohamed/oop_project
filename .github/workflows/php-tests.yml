@@ -1,0 +1,33 @@
+name: PHP Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Install Dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist
+
+      - name: Create Test Database
+        run: |
+          sudo service mysql start
+          mysql -u root -e "CREATE DATABASE IF NOT EXISTS oop_project;"
+          mysql -u root oop_project < database.sql
+
+      - name: Run PHPUnit Tests
+        run: vendor/bin/phpunit --colors=always
