@@ -12,7 +12,7 @@ class Database{
             $host = 'localhost';
             $dbname ='oop_project';
             $user = 'root';
-            $password = '';
+            $password = 'root';
             $opchens = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
