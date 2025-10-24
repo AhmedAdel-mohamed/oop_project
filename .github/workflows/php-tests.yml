@@ -1,50 +1,76 @@
+# name: PHP Tests
+
+# on: [push, pull_request]
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         env:
+#           MYSQL_ROOT_PASSWORD: root
+#           MYSQL_DATABASE: oop_project
+#         ports:
+#           - 3306:3306
+#         options: >-
+#           --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+#           --health-interval=10s
+#           --health-timeout=5s
+#           --health-retries=3
+
+#     steps:
+#       - uses: actions/checkout@v4
+
+#       - name: Setup PHP
+#         uses: shivammathur/setup-php@v2
+#         with:
+#           php-version: '8.2'
+#           extensions: pdo_mysql
+
+#       - name: Install Dependencies
+#         run: composer install
+
+#       - name: Setup Database
+#         run: |
+#           mysql -h 127.0.0.1 -P 3306 -uroot -proot -e "
+#             CREATE DATABASE IF NOT EXISTS oop_project;
+#             USE oop_project;
+#             CREATE TABLE IF NOT EXISTS users (
+#               id INT AUTO_INCREMENT PRIMARY KEY,
+#               name VARCHAR(100) NOT NULL,
+#               email VARCHAR(150) NOT NULL UNIQUE,
+#               password VARCHAR(255) NOT NULL,
+#               created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+#             );
+#           "
+          
+
+#       - name: Run Tests
+#         run: vendor/bin/phpunit --colors=always
 name: PHP Tests
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: oop_project
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: pdo_mysql
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: composer install
 
-      - name: Setup Database
-        run: |
-          mysql -h 127.0.0.1 -P 3306 -uroot -proot -e "
-            CREATE DATABASE IF NOT EXISTS oop_project;
-            USE oop_project;
-            CREATE TABLE IF NOT EXISTS users (
-              id INT AUTO_INCREMENT PRIMARY KEY,
-              name VARCHAR(100) NOT NULL,
-              email VARCHAR(150) NOT NULL UNIQUE,
-              password VARCHAR(255) NOT NULL,
-              created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-          "
+      - name: Give PHPUnit permission
+        run: chmod +x vendor/bin/phpunit
 
-      - name: Run Tests
+      - name: Run tests
         run: vendor/bin/phpunit --colors=always
