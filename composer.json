@@ -1,3 +1,4 @@
+
 {
   "name": "ahmedadel/crud-oop",
   "description": "Final PHP OOP CRUD + API + Auth project",
@@ -5,6 +6,11 @@
   "autoload": {
     "psr-4": {
       "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
     }
   },
   "require": {},

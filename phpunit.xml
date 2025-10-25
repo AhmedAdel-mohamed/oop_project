@@ -1,3 +1,15 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true">
+    <php>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_NAME" value="oop_project"/>
+        <env name="DB_USER" value="root"/>
+        <env name="DB_PASS" value=""/>
+    </php>
+</phpunit> -->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php"
          colors="true"
@@ -8,4 +20,11 @@
         <env name="DB_USER" value="root"/>
         <env name="DB_PASS" value=""/>
     </php>
+    
+    <!-- 🟢 إضافة هذا القسم -->
+    <testsuites>
+        <testsuite name="Project Tests">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
