@@ -20,7 +20,7 @@ class AuthService
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 // لو المستخدم مش موجود أو الباسورد غلط
-        if ($user || !password_verify($password, $user['password'])) {
+        if (!$user || !password_verify($password, $user['password'])) {
            
             return false;
         }
