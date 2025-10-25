@@ -13,7 +13,7 @@ class Database {
             $host = '127.0.0.1'; // استخدم 127.0.0.1 بدل localhost
             $dbname = 'oop_project';
             $user = 'root';
-            $password = '';
+            $password = 'root';
             $options = [ // صححت typo
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
